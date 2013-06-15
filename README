@@ -3,8 +3,9 @@ gcontacts
 
 Google contacts address book mutt interface
 
-This makes query to google contact address and print in a mutt understandable
-format. To make query faster google contacts are fetched locally.
+This is a stupid very small script that makes query to google contact address
+book and print result in a mutt understandable format. To make query faster
+google contacts are fetched locally.
 
 == Requirements ==
 
