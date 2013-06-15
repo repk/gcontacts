@@ -1,0 +1,26 @@
+gcontacts
+=========
+
+Google contacts address book mutt interface
+
+This makes query to google contact address and print in a mutt understandable
+format. To make query faster google contacts are fetched locally.
+
+== Requirements ==
+
+This uses the googlecl program (http://code.google.com/p/googlecl/)
+
+
+== Installation ==
+
+Modify BOOKCACHE variable to point to a proper address book cache destination
+and then copy gcontacts.sh anywhere you want.
+
+== Muttrc ==
+
+You can add this to your muttrc :
+
+#google address book query
+set query_command = "PATH-TO-GCONTACTS.SH list '%s'"
+bind editor \t complete-query
+macro index,pager gr "<shell-escape>PATH-TO-GCONTACTS.SH fetch<enter>" "Gcontacts fetch address book"
