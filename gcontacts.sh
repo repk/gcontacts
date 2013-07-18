@@ -23,12 +23,36 @@ list()
 
 }
 
+
+fmt()
+{
+	_E=$1
+	_N=$2
+	_P=$3
+
+	if [ -n "$(echo ${_E} | grep '@')" ]; then
+		echo "${_E}	${_N}	${_P}"
+	fi
+}
+
+
+fmt_line()
+{
+	while read line
+	do
+		NAME=$(echo ${line} | cut -d',' -f1)
+		PHONE=$(echo ${line} | cut -d',' -f3)
+		for EMAIL in $(echo ${line} | cut -d',' -f2 | tr -d ';')
+		do
+			fmt "${EMAIL}" "${NAME}" "${PHONE}"
+		done
+	done
+}
+
 fetch()
 {
 	_F=$1
-	google contacts list ".*" --fields name,email,phone |		\
-	       sed "s/\([^,]*\),\([^,]*\),\([^,]*\)/\2	\1	\3/" |	\
-	       grep -v -e "^None" > ${_F}
+	google contacts list ".*" --fields name,email,phone | fmt_line > ${_F}
 }
 
 PROGNAME=$0
